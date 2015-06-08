@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>MediaInfo</title>
+    <meta name="description" content="MediaInfo, metadata extractions tool and software integration. MediaInfo is a flexible open source tool used to extract relevant technical and tag metadata from an extensive array of media file formats. This software has been successfully implemented into corporate and not-for-profit organizational workflows for the batch processing of digital audio-visual assets. This talk will give an overview of the software framework and the ways it can be implemented into any audio-visual metadata extraction workflow.">
+    <meta name="author" content="MediaArea.net">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../Tools/reveal-js/css/reveal.min.css">
+    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/serif.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="../Tools/reveal-js/lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '../Tools/reveal-js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../Tools/reveal-js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+    
+    <!-- MediaArea specific -->
+    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/MediaArea.css"> 
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <div class="slides">
+
+
+        <section>
+            <h1><strong>MediaInfo</strong></h1>
+            <p>metadata extractions tool<br/>
+            &amp; software integration</p>
+            <p>
+            <br/><img style="border-color: transparent;" src="img/MediaInfo_90x90.png"><br/>
+            </p>
+            <p>
+              Jérôme Martinez<br>
+              <a href="https://mediaarea.net">MediaArea.net SARL</a>
+            </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaInfo<br/> is <strong>versatile</strong>.</h2><br>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Containers/wrappers</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>SMPTE containers (MXF/DCP/IMF)</li>
+              <li>GXF, LXF</li>
+              <li>P2, XDCAM</li>
+              <li>MPEG streaming containers (ts/m2ts/mpg/vob)</li>
+              <li>MPEG file container (mp4)</li>
+              <li>Quicktime (qt/mov)</li>
+              <li>Matroska (mkv/mka/mks)</li>
+              <li>RIFF (avi/wav/w64)</li>
+              <li>Apple/SGI (aiff/aifc)</li>
+              <li>Windows Media (asf/wma/wmv)</li>
+              <li>...</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Video/image formats</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>HEVC/H.265</li>
+              <li>AVC/H.264</li>
+              <li>MPEG-1/2 Video (mpgv/mpv/m1v/m2v)</li>
+              <li>VC-1, VC-3/DNxHD</li>
+              <li>DPX, EXR</li>
+              <li>PNG, TIFF</li>
+              <li>JPEG, JPEG 2000</li>
+              <li>FFv1</li>
+              <li>...</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Audio formats</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>PCM</li>
+              <li>Dolby E</li>
+              <li>AC-3, E-AC-3</li>
+              <li>DTS</li>
+              <li>AAC/HE-AAC/HE-AACv2</li>
+              <li>FLAC</li>
+              <li>MPEG-1/2 Audio (mp1/mp2/mp3)</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Captions/Subtitles</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>CEA-606/708</li>
+              <li>DVB subtitles</li> 
+              <li>ARIB captions</li> 
+              <li>N19/STL</li> 
+              <li>Teletext</li>
+              <li>CDP</li>
+              <li>WST</li>
+              <li>TTML</li>
+              <li>...</li>
+            </ul>
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Metadata</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Container-specific</li>
+              <li>Ancillary data</li> 
+              <li>Time codes (MXF, GXF, QuickTime...)</li> 
+              <li>Bar data</li> 
+              <li>AFD</li>
+              <li>AS-11/DPP</li>
+              <li>Cheksums presence</li>
+              <li>...</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Examples of Metadata</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Writing library</li>
+              <li>Channel assignment (left, right, rear...)</li> 
+              <li>Audio/caption language</li> 
+              <li>Law rating</li> 
+              <li>Broadcast service name</li>
+            </ul>
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Input formats</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Files (local/network)</li>
+              <li>FTP/FTPS/SFTP</li> 
+              <li>HTTP/HTTPS</li> 
+              <li>Direct memory access</li> 
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Export formats</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Flat text</li>
+              <li>XML</li>
+              <li>EBUCore (1.5/1.6)</li>
+              <li>PBCore (1.2/2.0)</li> 
+              <li>MPEG-7</li>
+              <li>FIMS (Work in progress, 1.1/1.2)</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+            <h2 style="text-align:left;">MediaInfo<br/> works <strong>everywhere</strong>.</h2><br>
+            <aside class="notes">
+
+            </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Interfaces</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>API (library)</li>
+              <li>Command Line Interface</li>
+              <li>Graphical User Interface</li>
+            </ul>
+          </p>
+          <aside class="notes">
+Library = .dll on Windows, .dylib on Mac, .so on Unix
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Bindings</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>C, C++</li>
+              <li>C#/Mono</li>
+              <li>VB.net</li>
+              <li>Python</li>
+              <li>Java</li>
+              <li>node.js (unofficial)</li>
+              <li>...</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Platforms</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li><img style="border-color: transparent;" src="img/MediaInfo_Platforms.png"></li>
+              <li>Windows</li>
+              <li>Mac</li>
+              <li>Linux: Ubuntu, Mint, RHEL/CentOS, Fedora,<br/> SuSE, Solaris...</li>
+              <li>BSD: FreeBSD...</li>
+            </ul>
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Architectures</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Intel/AMD 32-bit</li>
+              <li>Intel/AMD 64-bit</li>
+              <li>IA64</li>
+              <li>PowerPC</li>
+              <li>ARM</li>
+              <li>...</li>
+            </ul>
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaInfo<br/> is <strong>open source</strong>.</h2><br>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">License</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>BSD-2-Clause license</li> 
+              <li>Code source available for everyone</li>
+              <li>Contacting developer not mandatory</li>
+              <li>Not tied to a company</li>
+            </ul>
+          </p>
+          <aside class="notes">
+* Simple license (BSD like): Redistribution and use in source and binary forms, with or without modification, are permitted.<br/>
+means: just cite my name (commercial / proprietary products are welcome) <br/>
+* You want to improve it with a super feature on your own? Do it! <br/>
+Contacting the main developer is not mandatory. <br/>
+You contract him only if his offer suits your needs, else you can contract anyone else. <br/>
+You are not tied to a company. The company is going in the wrong direction? You fork.
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Business model</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Free: Software & developed features</li>
+              <li>Not free: Closed source versions </li>
+              <li>Not free: Bug correction</li> 
+              <li>Not free: New features </li>
+              <li>Not free: Support/forensics </li>
+            </ul>
+          </p>
+          <aside class="notes">
+Exception about developed features: some people want to pay for a closed source version of a feature. You can sponsor for making it open source
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Examples of sponsored features (0)</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>MPEG-7 export</li>
+              <li>EBUCore</li> 
+              <li>AS-11 (UK DPP)</li>
+              <li>IMF</li>
+              <li>DTS Neural Audio</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Examples of sponsored features (1)</h2><br>
+          <h3 style="text-align:left;">MPEG-7 export</h3>
+          <p style="text-align:left;">
+            <ul>
+              <li>Sponsored by Bibliothèque Nationale de France (National Library of France)</li> 
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Examples of sponsored features (2)</h2><br>
+          <h3 style="text-align:left;">EBUCore</h3>
+          <p style="text-align:left;">
+            <ul>
+              <li>National Library of Wales sponsored EBUCore 1.5 output</li>
+              <li>EBU sponsored EBUCore 1.6 update</li> 
+              <li>Features can be sponsored step by step</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Examples of sponsored features (3)</h2><br>
+          <h3 style="text-align:left;">AS-11 (UK DPP)</h3>
+          <p style="text-align:left;">
+            <ul>
+              <li>Title, track layout, audio languages,<br/> open/closed caption presence, segments, copyright, FPA...</li>
+              <li>Initial version sponsored by Digimetrics (now part of Tektronix)</li> 
+              <li>AS-11 to EBUCore mapping sponsored by EBU</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Examples of sponsored features (4)</h2><br>
+          <h3 style="text-align:left;">IMF</h3>
+          <p style="text-align:left;">
+            <ul>
+              <li>SMPTE ST-2067 support</li>
+              <li>Participation to IMF plugfests</li> 
+              <li>Sponsored by Digimetrics (now part of Tektronix)</li>
+              <li>(Work in progress)</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Examples of sponsored features (5)</h2><br>
+          <p style="text-align:left;">DTS Neural Audio</h3>
+          <p style="text-align:left;">
+            <ul>
+              <li>Presence detection (by metadata) of 5.1 transported in a 2.0 stream</li>
+              <li>Sponsored by Numericable</li> 
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Examples of sponsored features (6)</h2><br>
+          <h3 style="text-align:left;">MediaConch</h3>
+          <p style="text-align:left;">
+            <ul>
+              <li>Based on MediaInfo</li>
+              <li>3-year project</li> 
+              <li>Sponsored by European Union</li>
+              <li>Includes implementation checker, policy checker, reporter, and fixer</li>
+              <li>Initial focus: archival Matroska/FFV1/PCM</li>
+              <li>Future focus: format sponsorship opportunities</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Example of closed source (0)</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>When open source does not fit the sponsor</li>
+              <li>Closed source development is available</li> 
+              <li>Option to pay back for open source later</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Example of closed source (1)</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li><a href="http://www.tek.com/aurora">Digimetrics (now part of Tektronix) Aurora</a></li>
+              <li>Automated File-based QC Software</li>
+              <li>More detailed container analysis</li> 
+              <li>latest developed feature: <a href="https://www.irt.de/en/publications/technical-guidelines.html">ARD/ZDF broadcast profiles</a></li>
+            </ul>
+          </p>
+          <img src="img/Aurora.png">
+          <aside class="notes">
+Example: MPEG-2 Video missing macroblocks detection (sometimes a frame is cut and it is not detected before the broadcast)
+ARD/ZDF broadcast profile will be included in next version of Aurora, in July 2015
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Example of closed source (2)</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li><a href="http://www.tek.com/hydra-frame-accurate-file-based-player-software">Digimetrics (now part of Tektronix) Hydra</a></li>
+              <li>File-based Player Software</li>
+              <li>Demuxer feature addition</li>
+            </ul>
+          </p>
+          <img width="50%" height="50%" src="img/Hydra_MediaInfo.png">
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaInfo<br/> can be <strong>automated</strong>.</h2><br>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Automation (0)</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Command line batch process</li>
+              <li>DLL can be used for direct inclusion in your workflow</li>
+              <li>MediaInfo can be adapted to any workflow</li>
+              <li>Consultation available</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Automation (1)</h2><br>
+          <h3 style="text-align:left;">VRT example</h3>
+          <img width="50%" height="50%" src="img/VRT_MediaInfo_Workflow.png">
+          <aside class="notes">
+VRT workflow uses MediaInfo.
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Automation (2)</h2><br>
+          <h3 style="text-align:left;">Telestream Vantage example</h3>
+          <img width="50%" height="50%" src="img/Vantage_MediaInfo_Workflow.png">
+          <aside class="notes">
+Vantage workflow includes MediaInfo.
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">What's next?</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Better IMF support</li>
+              <li>MediaTrace</li>
+              <li>Sony's camera metadata</li>
+              <li>MediaConch</li>
+              <li>Amazon S3 and Microsoft Azure input</li>
+              <li>Your feature?</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+
+    </div>
+
+    <script src="../Tools/reveal-js/lib/js/head.min.js"></script>
+    <script src="../Tools/reveal-js/js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: '../Tools/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../Tools/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../Tools/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../Tools/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '../Tools/reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: '../Tools/reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
