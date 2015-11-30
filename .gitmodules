@@ -1,0 +1,3 @@
+[submodule "2015-11-20_AMIA"]
+	path = 2015-11-20_AMIA
+	url = git@github.com:ablwr/mediaconch_amia15.git
