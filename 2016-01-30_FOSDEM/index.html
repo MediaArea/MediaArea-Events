@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>MediaConch</title>
+    <meta name="description" content="MediaConch: implementation and policy checking on FFV1, Matroska, LPCM, and more">
+    <meta name="author" content="Jérôme Martinez">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../Tools/reveal-js/css/reveal.min.css">
+    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/serif.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="../Tools/reveal-js/lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '../Tools/reveal-js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../Tools/reveal-js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+    
+    <!-- MediaArea specific -->
+    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/MediaArea.css"> 
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <div class="slides">
+
+
+        <section>
+          <h1><strong>MediaConch</strong></h1>
+          <p>implementation and policy checking<br/> on FFV1, Matroska, LPCM, and more</p>
+          <p>
+          <br/><img style="border-color: transparent;" src="img/MediaInfo_90x90.png"><br/>
+          </p>
+          <p>
+              Jérôme Martinez<br>
+              <a href="https://mediaarea.net">MediaArea.net SARL</a>
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">What is MediaConch?</h2>
+          <p style="text-align:left;">A conformance checker</p>
+          <ul>
+            <li>Implementation checker</li>
+            <li>Policy checker</li>
+            <li>Reporter</li>
+            <li>Fixer</li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">What is MediaConch?</h2>
+          <p style="text-align:left;">A conformance checker ... in three formats</p>
+          <ul>
+            <li>Command line</li>
+            <li>Graphical interface</li>
+            <li>Web interface</li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaConch and open source</h2><br>
+          <ul>
+            <li>GPLv3+ and MPLv2+</li>
+            <li>Relies on MediaInfo (metadata extraction tool)</li>
+            <li>Uses Qt, sqlite, libevent, libxml2, libxslt, libexslt...</li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Formats</h2><br>
+          <ul>
+            <li>
+              <p>Prioritizes...</p>
+              <ul>
+                <li>Matroska</li>
+                <li>FFV1</li>
+                <li>PCM</li>
+              </ul>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <p>But can accept any format supported by MediaInfo</p>
+              <ul>
+                <li>Mainly aspolicy checker</li>
+                <li>Implementation checker for other formats can be developed in the future</li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Versatile</h2><br>
+          <ul>
+            <li>
+              <p>Binaries are provided for:</p>
+              <ul>
+                <li>Windows</li>
+                <li>Mac</li>
+                <li>Linux (Ubuntu, Debian, Fedora, OpenSUSE...)</li>
+                <li>Can be ported on other distros (BSD...)</li>
+              </ul>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <p>Input can be from:</p>
+              <ul>
+                <li>Files (local/network)</li>
+                <li>FTP/FTPS/SFTP</li> 
+                <li>HTTP/HTTPS</li> 
+                <li>Amazon S3</li> 
+              </ul>
+            </li>
+          </ul>
+          <ul>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Standardization</h2><br>
+          <ul>
+            <li>Matroska is in heavy use but not standardized</li>
+            <li>FFV1 is prefered by some entities but not standardized</li>
+          </ul>
+          <ul>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">CELLAR: IETF workgroup</h2><br>
+          <ul>
+            <li>Open standards group</li>
+            <li>Goal to standardize Matroska/FFV1/FLAC</li>
+            <li>A lot of progress, especially with Matroska/EBML specs</li>
+          </ul>
+          <ul>
+          </ul>
+          <aside class="notes">
+- timecode in matroska
+- ffv1 and bayer formats, or log
+- crc in mkv
+- machine readable format for ebml specs
+- colour format data
+- language
+- ????
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Sponsorship</h2><br>
+          <ul>
+            <li>3-year project (2015-2017)</li>
+            <li>Sponsored by European Union</li>
+            <li>Open source is required!</li>
+          </ul>
+          <p><img src="img/pfo_logo.png" alt="PREFORMA logo">
+          <img src="img/eu_logo.png" alt="European Commission logo">
+          <img src="img/ec_logo.png" alt="FP7-ICT Programme logo"></p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Sponsorship</h2><br>
+          <p style="text-align:left;">3 projects:</p>
+          <ul>
+            <li>Video (Matroska/FFV1/PCM):<br/> MediaConch (MediaArea)</li>
+            <li>Document (PDF):<br/> VeraPDF (Open Preservation Foundation)</li> 
+            <li>Image (TIFF):<br/> DPF Manager (Easy Innova)</li> 
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">What's next?</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Still under development</li>
+              <li>Client/Server, asynchronous mode (handling of huge libraries)</li>
+              <li>Better user interface</li>
+              <li>Statistics</li>
+              <li>Standardize Matroska and FFV1</li>
+              <li>More conformance tests</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Want to help us?</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>CELLAR participation</li>
+              <li>Implementing CRC-32 into Matroska and FFV1</li>
+              <li>Quality checking for all interfaces</li>
+              <li>Bug tracking and reporting</li>
+              <li>Documentation</li>
+              <li>Your weird video errors</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+            <p>
+            <img style="border-color: transparent;" src="img/MediaInfo_90x90.png"><br/>
+            </p>
+            <h2>Stay in touch</h2>
+            <p>MediaArea: <a href="//mediaarea.net">https://mediaarea.net</a>, <a href="https://twitter.com/MediaArea_Net">@MediaArea_net</a></p>
+            <p>MediaConch: <a href="//mediaarea.net/MediaConch">https://mediaarea.net/MediaConch</a>, <a href="https://twitter.com/MediaConch">@MediaConch</a></p></p>
+            <p>Jérôme Martinez: <a href="mailto:jerome@mediaarea.net">jerome@mediaarea.net</a></p>
+            <p>Slides: <a href="//mediaarea.net/Events">https://mediaarea.net/Events</a></p>
+            <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a></p>
+        </section>
+
+    </div>
+
+    <script src="../Tools/reveal-js/lib/js/head.min.js"></script>
+    <script src="../Tools/reveal-js/js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: '../Tools/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../Tools/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../Tools/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../Tools/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '../Tools/reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: '../Tools/reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
