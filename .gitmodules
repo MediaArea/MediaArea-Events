@@ -1,3 +1,6 @@
 [submodule "2015-11-20_AMIA"]
 	path = 2015-11-20_AMIA
 	url = git@github.com:ablwr/mediaconch_amia15.git
+[submodule "2016-03-10_Code4Lib"]
+	path = 2016-03-10_Code4Lib
+	url = git@github.com:ablwr/free_your_workflows.git
