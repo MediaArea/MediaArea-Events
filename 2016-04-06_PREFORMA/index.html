@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>MediaConch</title>
+    <meta name="description" content="MediaConch: implementation and policy checking on FFV1, Matroska, LPCM, and more">
+    <meta name="author" content="Jérôme Martinez">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../Tools/reveal-js/css/reveal.min.css">
+    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/serif.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="../Tools/reveal-js/lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '../Tools/reveal-js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../Tools/reveal-js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+    
+    <!-- MediaArea specific -->
+    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/MediaArea.css"> 
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <div class="slides">
+
+
+        <section>
+          <h1><strong>MediaConch</strong></h1>
+          <p>
+            Implementation and policy checking<br/> on FFV1, Matroska, LPCM, and more<br/>
+            <img style="border-color: transparent;" src="img/MediaConch_90x90.png">
+          </p>
+          <p>
+              Jérôme Martinez<br>
+              <a href="https://mediaarea.net">MediaArea.net SARL</a>
+          </p>
+          <p>
+            Open Source Preservation Workshop - April 2016<br/>
+            <img style="border-color: transparent;" src="img/pfo_logo.png" alt="PREFORMA logo">
+            <img style="border-color: transparent;" src="img/eu_logo.png" alt="European Commission logo">
+            <img style="border-color: transparent;" src="img/ec_logo.png" alt="FP7-ICT Programme logo">
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">What is MediaConch?</h2>
+          <p style="text-align:left;">A conformance checker</p>
+          <ul>
+            <li>Implementation checker</li>
+            <li>Policy checker</li>
+            <li>Reporter</li>
+            <li>Fixer</li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">What is MediaConch?</h2>
+          <p style="text-align:left;">Implementation and Policy reporter<br/>
+          <img style="border-color: transparent;" src="img/mediaconch_reporter.png" alt="Reporter">
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">What is MediaConch?</h2>
+          <p style="text-align:left;">Example of report<br/>
+          <img style="border-color: transparent;" src="img/mediaconch_report.png" alt="Reporter">
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">What is MediaConch?</h2>
+          <p style="text-align:left;">General information about your files<br/>
+          <img style="border-color: transparent;" src="img/mediaconch_mediainfo.png" alt="Trace">
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">What is MediaConch?</h2>
+          <p style="text-align:left;">Inspect your files<br/>
+          <img style="border-color: transparent;" src="img/mediaconch_trace.png" alt="Trace">
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">What is MediaConch?</h2>
+          <p style="text-align:left;">Policy editor<br/>
+          <img style="border-color: transparent;" src="img/mediaconch_policies.png" alt="Policies">
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">What is MediaConch?</h2>
+          <p style="text-align:left;">A conformance checker ... in four formats</p>
+          <ul>
+            <li>Command line</li>
+            <li>Graphical interface</li>
+            <li>Server (REST API)</li>
+            <li>Web interface</li>
+            <li>(Planned) a library (.dll/.so/.dylib)</li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaConch and open source</h2>
+          <ul>
+            <li>GPLv3+ and MPLv2+</li>
+            <li>Relies on MediaInfo (metadata extraction tool)</li>
+            <li>Use well-known open source libraries: Qt, sqlite, libevent, libxml2, libxslt, libexslt...</li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Formats</h2>
+          <ul>
+            <li>
+              <p><strong>Priorities for the implementation checker</strong></p>
+              <ul>
+                <li>Matroska</li>
+                <li>FFV1</li>
+                <li>PCM</li>
+              </ul>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <p><strong>But also...</strong></p>
+              <ul>
+                <li>Can accept any format supported by MediaInfo for the policy checker
+                  <ul>
+                    <li>MXF/JP2k? Yes</li>
+                    <li>QuickTime? Yes</li>
+                    <li>Audio files (WAV, BWF, AIFF...)? Yes</li>
+                    <li>...</li>
+                  </ul>
+                </li>
+                <li>Implementation checker for other formats can be developed in the future: we need you!</li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Formats</h2>
+          <ul>
+            <li>
+              <p><strong>Can be expanded</strong></p>
+              <ul>
+                <li>By plugins
+                  <ul>
+                    <li>Support of PDF checker: VeraPDF plugin</li>
+                    <li>Support of TIFF checker: DPF Manager plugin</li>
+                    <li>You use another checker? Let us know</li>
+                  </ul>
+                </li>
+                <li>By internal development
+                  <ul>
+                    <li>More tests on your preferred format is possible</li>
+                    <li>It depends on you!</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Versatile</h2>
+          <ul>
+            <li>
+              <p>Several input formats are accepted</p>
+              <ul>
+                <li>FFV1 from MOV or AVI? Also possible</li>
+                <li>Matroska with other video formats? Also possible</li>
+                <li>(Work in progress) Extraction of a PDF or TIFF attachement from a Matroska container and analyze with a plugin (e.g. VeraPDF and DPF Mananger)</li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Versatile</h2>
+          <ul>
+            <li>
+              <p>Input can be from:</p>
+              <ul>
+                <li>Files (local/network)</li>
+                <li>FTP/FTPS/SFTP</li> 
+                <li>HTTP/HTTPS</li> 
+                <li>Amazon S3</li> 
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Versatile</h2>
+          <ul>
+            <li>
+              <p>Binaries are provided for:</p>
+              <ul>
+                <li>Windows</li>
+                <li><p>Mac</p>
+                <ul>
+                  <li>Howbrew users:<br/>
+                  "brew install mediaconch", that's all!</li>
+                </ul>
+                </li>
+                <li><p>Linux (Ubuntu, Debian, Fedora, OpenSUSE...)</p>
+                <ul>
+                  <li>Ubuntu 16.04 and Debian Testing/9 users:<br/>
+                  "apt-get install mediaconch", that's all!<br/>
+                  (it is in the official distros repository)</li>
+                </ul>
+                </li>
+                <li>Embedded devices? Doable<br>(we tested it on a Raspberry Pi <img style="border-color: transparent; vertical-align:middle" width="10%" src="img/RaspberryPi.jpg" />)</li>
+                <li>Can be ported on other distros (BSD...)</li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Standardization</h2>
+          <ul>
+            <li>Matroska is widely used but not (yet) standardized</li>
+            <li>FFV1 is gaining increasing usage in preservation contexts but is not (yet) standardized</li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">CELLAR: IETF workgroup</h2>
+          <ul>
+            <li>Open standards group</li>
+            <li>Goal to standardize Matroska/FFV1/FLAC</li>
+            <li>A lot of progress, especially with Matroska/EBML specs</li>
+            <li><a href="https://datatracker.ietf.org/wg/cellar/charter/">https://datatracker.ietf.org/wg/cellar/charter/</a></li>
+          </ul>
+          <aside class="notes">
+- timecode in matroska
+- ffv1 and bayer formats, or log
+- crc in mkv
+- machine readable format for ebml specs
+- colour format data
+- language
+- ????
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Worldwide</h2>
+          <ul>
+            <li>
+              <p>2 project leaders</p>
+              <ul>
+                <li>Jerôme Martinez (Digital Media Analysis Specialist, France)</li>
+                <li>Dave Rice  (Archivist, USA)</li>
+              </ul>
+            </li>
+            <li>
+              <p>Presentations worldwide</p>
+              <ul>
+                <li>IASA, France</li>
+                <li>FIAT/IFTA, Austria</li>
+                <li>FOSDEM, Belgium</li>
+                <li>AMIA, USA</li>
+                <li>Code4Lib, USA</li>
+                <li>JTS, Singapore</li>
+                <li>(next) IPRES, Switzerland</li>
+                <li>(next) IASA, USA</li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Matroska research corpus</h2>
+          <ul>
+            <li>We analyze all Matroska files from archive.org</li>
+            <li>Interface with some statistics of Matroska elements usage (e.g. files with CRC-32 elements...) <a href="https://mediaarea.net/MediaConchCorpus/">https://mediaarea.net/MediaConchCorpus/</a></li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">What's next?</h2>
+          <p style="text-align:left;">Still under development but already usable<br/>
+              (PREFORMA prototyping phase up to end 2016)</p>
+          <ul>
+            <li>Better handling of huge libraries</li>
+            <li>Better user interface</li>
+            <li>Statistics</li>
+            <li>Standardize Matroska and FFV1</li>
+            <li>More conformance tests</li>
+            <li>Integration in Archivematica</li>
+            <li>Fixer</li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">And after PREFORMA sponsorship?</h2>
+          <p style="text-align:left;">It depends on you!
+          </p>
+          <ul>
+            <li>This is open source</li>
+            <li>Driven by user requests</li>
+            <li>Everyone can develop or sponsor a development</li>
+            <li>
+              <p>Need ideas?</p>
+              <ul>
+                <li>Integration of test of your prefered format<br/>
+                (MXF? doable. JP2k? doable. WAV? doable...)</li>
+                <li>Integration of other checkers<br/>
+                (BWF MetaEdit? QCTools?)</li> 
+                <li>Better integration in your workflow</li> 
+                <li>...</li> 
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Example (Online)</h2>
+          <p>
+          <img style="border-color: transparent;" src="img/mediaconch.gif"><br/>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Example (Command line)</h2>
+          <p>
+          <img style="border-color: transparent;" src="img/mediaconch_cli_basic.gif"><br/>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Example (Plugins)</h2>
+          <p>
+          <img style="border-color: transparent;" src="img/mediaconch_plugins.png"><br/>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Example (Plugins)</h2>
+          <p>
+          <img style="border-color: transparent;" width="10%" src="img/verapdf.png">
+          <img style="border-color: transparent;" src="img/mediaconch_verapdf.png"><br/>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Example (Plugins)</h2>
+          <p>
+          <img style="border-color: transparent;" width="10%" src="img/dpfmanager.png">
+          <img style="border-color: transparent;" src="img/mediaconch_dpfmanager.png"><br/>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+            <p>
+            <img style="border-color: transparent;" src="img/MediaConch_90x90.png"><br/>
+            </p>
+            <h2>Stay in touch</h2>
+            <p>MediaArea: <a href="//mediaarea.net">https://mediaarea.net</a>, <a href="https://twitter.com/MediaArea_Net">@MediaArea_net</a></p>
+            <p>MediaConch: <a href="//mediaarea.net/MediaConch">https://mediaarea.net/MediaConch</a>, <a href="https://twitter.com/MediaConch">@MediaConch</a></p></p>
+            <p>Jérôme Martinez: <a href="mailto:jerome@mediaarea.net">jerome@mediaarea.net</a></p>
+            <p>Slides: <a href="//mediaarea.net/Events">https://mediaarea.net/Events</a></p>
+            <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a></p>
+        </section>
+
+    </div>
+
+    <script src="../Tools/reveal-js/lib/js/head.min.js"></script>
+    <script src="../Tools/reveal-js/js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: '../Tools/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../Tools/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../Tools/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../Tools/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '../Tools/reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: '../Tools/reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
