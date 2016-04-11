@@ -1,46 +1,45 @@
 <!doctype html>
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
+	<head>
+		<meta charset="utf-8">
 
     <title>MediaConch</title>
+
     <meta name="description" content="MediaConch: implementation and policy checking on FFV1, Matroska, LPCM, and more">
     <meta name="author" content="Jérôme Martinez">
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-    <link rel="stylesheet" href="../Tools/reveal-js/css/reveal.min.css">
-    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/serif.css" id="theme">
+		<link rel="stylesheet" href="../Tools/reveal-js/css/reveal.css">
+		<link rel="stylesheet" href="../Tools/reveal-js/css/theme/serif.css" id="theme">
 
-    <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="../Tools/reveal-js/lib/css/zenburn.css">
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../Tools/reveal-js/lib/css/zenburn.css">
 
-    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
-    <script>
-      if( window.location.search.match( /print-pdf/gi ) ) {
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = '../Tools/reveal-js/css/print/pdf.css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-      }
-    </script>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
 
-    <!--[if lt IE 9]>
-    <script src="../Tools/reveal-js/lib/js/html5shiv.js"></script>
-    <![endif]-->
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
     
     <!-- MediaArea specific -->
     <link rel="stylesheet" href="../Tools/reveal-js/css/theme/MediaArea.css"> 
-  </head>
+	</head>
 
-  <body>
+	<body>
 
-    <div class="reveal">
+		<div class="reveal">
 
       <div class="slides">
 
@@ -471,7 +470,9 @@
             <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a></p>
         </section>
 
-    </div>
+			</div>
+
+		</div>
 
     <div style="position: fixed; height: 125px; width: 300px; bottom: 0px; left: 10px;">
         <img style="border-color: transparent; width: 165px;" src="img/pfo_logo.png" alt="PREFORMA logo"><br />
@@ -480,37 +481,32 @@
     </div>
 
     <script src="../Tools/reveal-js/lib/js/head.min.js"></script>
-    <script src="../Tools/reveal-js/js/reveal.min.js"></script>
+    <script src="../Tools/reveal-js/js/reveal.js"></script>
 
-    <script>
+		<script>
 
-      // Full list of configuration options available here:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        controls: true,
-        progress: true,
-        history: true,
-        center: true,
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
 
-        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-        transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-        // Parallax scrolling
-        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-        // parallaxBackgroundSize: '2100px 900px',
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
 
-        // Optional libraries used to extend on reveal.js
-        dependencies: [
-          { src: '../Tools/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-          { src: '../Tools/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: '../Tools/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: '../Tools/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-          { src: '../Tools/reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-          { src: '../Tools/reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-        ]
-      });
+		</script>
 
-    </script>
-
-  </body>
+	</body>
 </html>
