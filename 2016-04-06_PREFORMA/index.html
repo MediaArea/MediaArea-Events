@@ -1,46 +1,45 @@
 <!doctype html>
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
+	<head>
+		<meta charset="utf-8">
 
     <title>MediaConch</title>
+
     <meta name="description" content="MediaConch: implementation and policy checking on FFV1, Matroska, LPCM, and more">
     <meta name="author" content="Jérôme Martinez">
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-    <link rel="stylesheet" href="../Tools/reveal-js/css/reveal.min.css">
-    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/serif.css" id="theme">
+		<link rel="stylesheet" href="../Tools/reveal-js/css/reveal.css">
+		<link rel="stylesheet" href="../Tools/reveal-js/css/theme/serif.css" id="theme">
 
-    <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="../Tools/reveal-js/lib/css/zenburn.css">
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../Tools/reveal-js/lib/css/zenburn.css">
 
-    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
-    <script>
-      if( window.location.search.match( /print-pdf/gi ) ) {
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = '../Tools/reveal-js/css/print/pdf.css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-      }
-    </script>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../Tools/reveal-js/css/print/pdf.css' : '../Tools/reveal-js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
 
-    <!--[if lt IE 9]>
-    <script src="../Tools/reveal-js/lib/js/html5shiv.js"></script>
-    <![endif]-->
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
     
     <!-- MediaArea specific -->
     <link rel="stylesheet" href="../Tools/reveal-js/css/theme/MediaArea.css"> 
-  </head>
+	</head>
 
-  <body>
+	<body>
 
-    <div class="reveal">
+		<div class="reveal">
 
       <div class="slides">
 
@@ -90,7 +89,7 @@
         <section>
           <h2 style="text-align:left;">What is MediaConch?</h2>
           <p style="text-align:left;">Example of report<br/>
-          <img style="border-color: transparent;" src="img/mediaconch_report.png" alt="Reporter">
+          <img style="border-color: transparent;" src="img/mediaconch_report.png" width="50%" alt="Reporter">
           </p>
           <aside class="notes">
 			download of the report<br/>
@@ -101,7 +100,7 @@
         <section>
           <h2 style="text-align:left;">What is MediaConch?</h2>
           <p style="text-align:left;">General information about your files<br/>
-          <img style="border-color: transparent;" src="img/mediaconch_mediainfo.png" alt="Trace">
+          <img style="border-color: transparent;" src="img/mediaconch_mediainfo.png" alt="MediaInfo">
           </p>
           <aside class="notes">
 
@@ -158,7 +157,7 @@
         </section>
 
         <section>
-          <h2 style="text-align:left;">MediaConch and open source</h2>
+          <h2 style="text-align:left;">Open source</h2>
           <ul>
             <li>GPLv3+ and MPLv2+</li>
             <li>Relies on MediaInfo (metadata extraction tool)</li>
@@ -174,7 +173,7 @@
           <h2 style="text-align:left;">Supported formats</h2>
           <ul>
             <li>
-              <p><strong>Priorities for the implementation checker</strong></p>
+              <p>Priorities for the implementation checker</p>
               <ul>
                 <li>Matroska</li>
                 <li>FFV1</li>
@@ -184,60 +183,11 @@
           </ul>
           <ul>
             <li>
-              <p><strong>But also...</strong></p>
+              <p>Can accept any format supported by MediaInfo for the policy checker</p>
               <ul>
-                <li>Can accept any format supported by MediaInfo for the policy checker
-                  <ul>
-                    <li>MXF + JP2k</li>
-                    <li>QuickTime/MOV</li>
-                    <li>Audio files (WAV, BWF, AIFF...)</li>
-                    <li>...</li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <aside class="notes">
-
-          </aside>
-        </section>
-
-        <section>
-          <h2 style="text-align:left;">Supported formats</h2>
-          <ul>
-            <li>
-              <p><strong>Can be expanded</strong></p>
-              <ul>
-                <li>By plugins
-                  <ul>
-                    <li>Support of PDF checker: VeraPDF plugin</li>
-                    <li>Support of TIFF checker: DPF Manager plugin</li>
-                    <li>You use another checker? Let us know</li>
-                  </ul>
-                </li>
-                <li>By internal development
-                  <ul>
-                    <li>More tests on your preferred format is possible</li>
-                    <li>It depends on you!</li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <aside class="notes">
-
-          </aside>
-        </section>
-
-        <section>
-          <h2 style="text-align:left;">Versatile</h2>
-          <ul>
-            <li>
-              <p>Several input formats are accepted</p>
-              <ul>
-                <li>FFV1 from MOV or AVI</li>
-                <li>Matroska with other video formats</li>
-                <li>(Work in progress) Extraction of a PDF or TIFF attachement from a Matroska container and analyze with a plugin (e.g. VeraPDF and DPF Manager)</li>
+                <li>MXF + JP2k</li>
+                <li>QuickTime/MOV</li>
+                <li>Audio files (WAV, BWF, AIFF...)</li>
                 <li>...</li>
               </ul>
             </li>
@@ -248,17 +198,50 @@
         </section>
 
         <section>
-          <h2 style="text-align:left;">Versatile</h2>
+          <h2 style="text-align:left;">Supported formats</h2>
+          <p style="text-align:left;">Can be expanded</p>
           <ul>
-            <li>
-              <p>Input can be from:</p>
+            <li>By plugins
               <ul>
-                <li>Files (local/network)</li>
-                <li>FTP/FTPS/SFTP</li> 
-                <li>HTTP/HTTPS</li> 
-                <li>Amazon S3</li> 
+                <li>Support of PDF checker: VeraPDF plugin</li>
+                <li>Support of TIFF checker: DPF Manager plugin</li>
+                <li>You use another checker? Let us know</li>
               </ul>
             </li>
+            <li>By internal development
+              <ul>
+                <li>More tests on your preferred format is possible</li>
+                <li>It depends on you!</li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Versatile</h2>
+          <p style="text-align:left;">Several input formats are accepted</p>
+          <ul>
+            <li>FFV1 from MOV or AVI</li>
+            <li>Matroska with other video formats</li>
+            <li>(Work in progress) Extraction of a PDF or TIFF attachement from a Matroska container and analyze with a plugin (e.g. VeraPDF and DPF Manager)</li>
+            <li>...</li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Versatile</h2>
+          <p style="text-align:left;">Input can be from:</p>
+          <ul>
+            <li>Files (local/network)</li>
+            <li>FTP/FTPS/SFTP</li> 
+            <li>HTTP/HTTPS</li> 
+            <li>Amazon S3</li> 
           </ul>
           <aside class="notes">
 			Can analyze files in batch
@@ -267,29 +250,22 @@
 
         <section>
           <h2 style="text-align:left;">Versatile</h2>
-          <ul>
-            <li>
-              <p>Binaries are provided for:</p>
-              <ul>
-                <li>Windows</li>
-                <li><p>Mac</p>
-                <ul>
-                  <li>Homebrew users:<br/>
-                  "brew install mediaconch", that's all!</li>
-                </ul>
-                </li>
-                <li><p>Linux (Ubuntu, Debian, Fedora, OpenSUSE...)</p>
-                <ul>
-                  <li>Ubuntu 16.04 and Debian Testing/9 users:<br/>
-                  "apt-get install mediaconch", that's all!<br/>
-                  (it is in the official distros repository)</li>
-                </ul>
-                </li>
-                <li>Embedded devices? Doable<br>(we tested it on a Raspberry Pi <img style="border-color: transparent; vertical-align:middle" width="10%" src="img/RaspberryPi.jpg" />)</li>
-                <li>Can be ported on other distros (BSD...)</li>
-              </ul>
-            </li>
-          </ul>
+            <p style="text-align:left;">Binaries are provided for:</p>
+            <ul>
+              <li>Windows</li>
+              <li>Mac<br />
+              <spanc>Homebrew users:"brew install mediaconch", that's all!</span>
+              </li>
+              <li>Linux (Ubuntu, Debian, Fedora, OpenSUSE...)<br />
+              <span style="font-size: smaller">Ubuntu 16.04 and Debian Testing/9 users:<br/>
+                "apt-get install mediaconch", that's all!<br/>
+                (it is in the official distros repository)</span>
+              </li>
+              <li>Embedded devices? Doable<br />
+              <span style="font-size: smaller">(we tested it on a Raspberry Pi <img style="border-color: transparent; vertical-align:middle" width="5%" src="img/RaspberryPi.jpg" />)</span>
+              </li>
+              <li>Can be ported on other distros (BSD...)</li>
+            </ul>
           <aside class="notes">
 
           </aside>
@@ -315,13 +291,6 @@
             <li><a href="https://datatracker.ietf.org/wg/cellar/charter/">https://datatracker.ietf.org/wg/cellar/charter/</a></li>
           </ul>
           <aside class="notes">
-- timecode in matroska
-- ffv1 and bayer formats, or log
-- crc in mkv
-- machine readable format for ebml specs
-- colour format data
-- language
-- ????
           </aside>
         </section>
 
@@ -330,14 +299,14 @@
           <ul>
             <li>
               <p>2 project leaders</p>
-              <ul>
+              <ul style="font-size: smaller">
                 <li>Jerôme Martinez (Digital Media Analysis Specialist, France)</li>
                 <li>Dave Rice  (Archivist, USA)</li>
               </ul>
             </li>
             <li>
               <p>Presentations worldwide</p>
-              <ul>
+              <ul style="font-size: smaller">
                 <li>IASA, France</li>
                 <li>FIAT/IFTA, Austria</li>
                 <li>FOSDEM, Belgium</li>
@@ -390,9 +359,8 @@
             <li>This is open source</li>
             <li>Driven by user requests</li>
             <li>Everyone can develop or sponsor a development</li>
-            <li>
-              <p>Potential features</p>
-              <ul>
+            <li>Potential features:
+              <ul style="font-size: smaller">
                 <li>Integration of test of your prefered format<br/>
                 (MXF? doable. JP2k? doable. WAV? doable...)</li>
                 <li>Integration of other checkers<br/>
@@ -410,7 +378,7 @@
         <section>
           <h2 style="text-align:left;">Example (Online)</h2>
           <p>
-          <img style="border-color: transparent;" src="img/mediaconch.gif"><br/>
+          <img style="border-color: transparent;" width="80%" src="img/mediaconch.gif"><br/>
           </p>
           <aside class="notes">
 
@@ -420,7 +388,7 @@
         <section>
           <h2 style="text-align:left;">Example (Command line)</h2>
           <p>
-          <img style="border-color: transparent;" src="img/mediaconch_cli_basic.gif"><br/>
+          <img style="border-color: transparent;" width="80%" src="img/mediaconch_cli_basic.gif"><br/>
           </p>
           <aside class="notes">
 
@@ -438,22 +406,16 @@
         </section>
 
         <section>
-          <h2 style="text-align:left;">Example (Plugins)</h2>
-          <p>
-          <img style="border-color: transparent;" width="10%" src="img/verapdf.png">
-          <img style="border-color: transparent;" src="img/mediaconch_verapdf.png"><br/>
-          </p>
+          <h2 style="text-align:left;">Example (Plugins) <img style="border-color: transparent;" width="10%" src="img/verapdf.png"></h2>
+          <p><img style="border-color: transparent;" src="img/mediaconch_verapdf.png"></p>
           <aside class="notes">
 
           </aside>
         </section>
 
         <section>
-          <h2 style="text-align:left;">Example (Plugins)</h2>
-          <p>
-          <img style="border-color: transparent;" width="10%" src="img/dpfmanager.png">
-          <img style="border-color: transparent;" src="img/mediaconch_dpfmanager.png"><br/>
-          </p>
+          <h2 style="text-align:left;">Example (Plugins) <img style="border-color: transparent;" width="10%" src="img/dpfmanager.png"></h2>
+          <p><img style="border-color: transparent; vertical-align:middle;" src="img/mediaconch_dpfmanager.png"></p>
           <aside class="notes">
 
           </aside>
@@ -471,7 +433,9 @@
             <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a></p>
         </section>
 
-    </div>
+			</div>
+
+		</div>
 
     <div style="position: fixed; height: 125px; width: 300px; bottom: 0px; left: 10px;">
         <img style="border-color: transparent; width: 165px;" src="img/pfo_logo.png" alt="PREFORMA logo"><br />
@@ -480,37 +444,32 @@
     </div>
 
     <script src="../Tools/reveal-js/lib/js/head.min.js"></script>
-    <script src="../Tools/reveal-js/js/reveal.min.js"></script>
+    <script src="../Tools/reveal-js/js/reveal.js"></script>
 
-    <script>
+		<script>
 
-      // Full list of configuration options available here:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        controls: true,
-        progress: true,
-        history: true,
-        center: true,
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
 
-        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-        transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-        // Parallax scrolling
-        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-        // parallaxBackgroundSize: '2100px 900px',
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../Tools/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../Tools/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../Tools/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../Tools/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../Tools/reveal-js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../Tools/reveal-js/plugin/notes/notes.js', async: true }
+				]
+			});
 
-        // Optional libraries used to extend on reveal.js
-        dependencies: [
-          { src: '../Tools/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-          { src: '../Tools/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: '../Tools/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: '../Tools/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-          { src: '../Tools/reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-          { src: '../Tools/reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-        ]
-      });
+		</script>
 
-    </script>
-
-  </body>
+	</body>
 </html>
