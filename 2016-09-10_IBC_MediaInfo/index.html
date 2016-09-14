@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>MediaInfo</title>
+    <meta name="description" content="MediaInfo, metadata extractions tool and software integration. MediaInfo is a flexible open source tool used to extract relevant technical and tag metadata from an extensive array of media file formats. This software has been successfully implemented into corporate and not-for-profit organizational workflows for the batch processing of digital audio-visual assets. This talk will give an overview of the software framework and the ways it can be implemented into any audio-visual metadata extraction workflow.">
+    <meta name="author" content="Jérôme Martinez">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../Tools/reveal-js/css/reveal.css">
+		<link rel="stylesheet" href="../Tools/reveal-js/css/theme/serif.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../Tools/reveal-js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../Tools//reveal-js/css/print/pdf.css' : '../Tools//reveal-js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+    
+    <!-- MediaArea specific -->
+    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/MediaArea.css"> 
+	</head>
+
+  <body>
+
+    <div class="reveal">
+
+      <div class="slides">
+
+
+        <section>
+            <h1><strong>MediaInfo</strong></h1>
+            <p>A files metadata extraction tool<br/>
+            <img style="border-color: transparent;" src="img/MediaInfo_90x90.png"><br/>
+            </p>
+            <p>
+              Jérôme Martinez<br>
+              <a href="https://mediaarea.net">MediaArea</a>
+            </p>
+            <p>
+              <img style="border-color: transparent; vertical-align: middle;" height="32" src="img/ebu.png">EBU Open Source Meet-Up at IBC 2016, 10 Sep 2016
+            </p>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">What is MediaInfo?</h2>
+          <p style="text-align:left;">MediaInfo is a convenient unified display of the most relevant technical and tag data for video and audio files.</p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">MediaInfo<br/> is <strong>versatile</strong>.</h2><br>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Containers/wrappers</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>SMPTE containers (MXF/DCP/IMF)</li>
+              <li>GXF, LXF</li>
+              <li>P2, XDCAM</li>
+              <li>MPEG streaming containers (ts/m2ts/mpg/vob)</li>
+              <li>MPEG file container (mp4)</li>
+              <li>Quicktime (qt/mov)</li>
+              <li>Matroska (mkv/mka/mks)</li>
+              <li>RIFF (avi/wav/w64)</li>
+              <li>Apple/SGI (aiff/aifc)</li>
+              <li>Windows Media (asf/wma/wmv)</li>
+              <li>...</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Video/image formats</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>HEVC/H.265</li>
+              <li>AVC/H.264</li>
+              <li>MPEG-1/2 Video (mpgv/mpv/m1v/m2v)</li>
+              <li>VC-1, VC-3/DNxHD</li>
+              <li>DPX, EXR</li>
+              <li>PNG, TIFF</li>
+              <li>JPEG, JPEG 2000</li>
+              <li>FFv1</li>
+              <li>...</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Audio formats</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>PCM</li>
+              <li>Dolby E</li>
+              <li>AC-3, E-AC-3</li>
+              <li>DTS</li>
+              <li>AAC/HE-AAC/HE-AACv2</li>
+              <li>FLAC</li>
+              <li>MPEG-1/2 Audio (mp1/mp2/mp3)</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Captions/Subtitles</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>CEA-606/708</li>
+              <li>DVB subtitles</li> 
+              <li>ARIB captions</li> 
+              <li>N19/STL</li> 
+              <li>Teletext</li>
+              <li>CDP</li>
+              <li>WST</li>
+              <li>TTML</li>
+              <li>...</li>
+            </ul>
+          </p>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Metadata</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Container-specific</li>
+              <li>Ancillary data</li> 
+              <li>Time codes (MXF, GXF, QuickTime...)</li> 
+              <li>Bar data</li> 
+              <li>AFD</li>
+              <li>AS-11/DPP</li>
+              <li>RDD18/EBU Tech 3349 Acquisition Metadata</li>
+              <li>...</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Examples of Metadata</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Width, height, frame rate, interlacement, bit depth, color space, subsampling, MXF version &amp; OP, ...</li>
+              <li>Writing library</li>
+              <li>Channel assignment (left, right, rear...)</li> 
+              <li>Audio/caption language</li> 
+              <li>Law rating</li> 
+              <li>Broadcast service name</li>
+              <li>Checksums presence</li>
+              <li>...</li>
+            </ul>
+          </p>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Input formats</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Files (local/network)</li>
+              <li>FTP/FTPS/SFTP</li> 
+              <li>HTTP/HTTPS (including Amazon S3)</li> 
+              <li>Direct memory access</li> 
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Export formats</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Flat text</li>
+              <li>XML</li>
+              <li>EBUCore (1.5/1.6)</li>
+              <li>PBCore (1.2/2.0)</li> 
+              <li>MPEG-7</li>
+              <li>FIMS (1.1/1.2)</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+            <h2 style="text-align:left;">MediaInfo<br/> works <strong>everywhere</strong>.</h2><br>
+            <aside class="notes">
+
+            </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Interfaces</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Graphical User Interface</li>
+              <li>Command Line Interface</li>
+              <li>API (library)</li>
+            </ul>
+          </p>
+          <aside class="notes">
+Library = .dll on Windows, .dylib on Mac, .so on Unix
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Bindings</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>C, C++</li>
+              <li>C#/Mono</li>
+              <li>VB.net</li>
+              <li>Python</li>
+              <li>Java</li>
+              <li>node.js (unofficial)</li>
+              <li>...</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Platforms</h2><br>
+          <p style="text-align:left;">
+            <img style="border-color: transparent;" src="img/MediaInfo_Platforms.png">
+            <ul>
+              <li>Windows</li>
+              <li>Mac</li>
+              <li>Linux: Ubuntu, Mint, RHEL/CentOS, Fedora,<br/> SuSE, Solaris...</li>
+              <li>BSD: FreeBSD...</li>
+            </ul>
+          </p>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Architectures</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Intel/AMD 32-bit</li>
+              <li>Intel/AMD 64-bit</li>
+              <li>IA64</li>
+              <li>PowerPC</li>
+              <li>ARM</li>
+              <li>...</li>
+            </ul>
+          </p>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">MediaInfo<br/> is <strong>open source</strong>.</h2><br>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">License</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Permissive license (BSD-2-Clause)</li> 
+              <li>Code source available for everyone</li>
+              <li>Contacting developer not mandatory</li>
+              <li>Can be include in any (Open Source or not) software</li>
+            </ul>
+          </p>
+          <aside class="notes">
+* Simple license (BSD like): Redistribution and use in source and binary forms, with or without modification, are permitted.<br/>
+means: just cite my name (commercial / proprietary products are welcome) <br/>
+* You want to improve it with a super feature on your own? Do it! <br/>
+Contacting the main developer is not mandatory. <br/>
+You contract him only if his offer suits your needs, else you can contract anyone else. <br/>
+You are not tied to a company. The company is going in the wrong direction? You fork.
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Business model</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>For free: Software & developed features</li>
+              <li>Not for free: Closed source versions </li>
+              <li>Not for free: Bug correction</li> 
+              <li>Not for free: New features </li>
+              <li>Not for free: Support/forensics </li>
+            </ul>
+          </p>
+          <aside class="notes">
+Exception about developed features: some people want to pay for a closed source version of a feature. You can sponsor for making it open source
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">MediaInfo<br/> can be <strong>automated</strong>.</h2><br>
+          <p style="text-align:left;">
+            <ul>
+              <li>Command line batch process</li>
+              <li>DLL can be used for direct inclusion in your workflow</li>
+              <li>MediaInfo can be adapted to any workflow</li>
+              <li>Consultation available</li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/MediaInfo_1920x90.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+            <h2>Stay in touch</h2>
+            <p>MediaArea: <a href="//mediaarea.net">https://mediaarea.net</a>, <a href="https://twitter.com/MediaArea_Net">@MediaArea_net</a></p>
+            <p>MediaInfo: <a href="//mediaarea.net/MediaInfo">https://mediaarea.net/MediaInfo</a></p>
+            <p>MediaConch: <a href="//mediaarea.net/MediaConch">https://mediaarea.net/MediaConch</a></p>
+            <p>Jérôme Martinez: <a href="mailto:jerome@mediaarea.net">jerome@mediaarea.net</a></p>
+            <p>Slides: <a href="//mediaarea.net/Events">https://mediaarea.net/Events</a></p>
+            <p>License (except images): <a hef="https://creativecommons.org/licenses/by/4.0/">CC BY</a></p>
+        </section>
+
+    </div>
+
+    <script src="../Tools/reveal-js/lib/js/head.min.js"></script>
+    <script src="../Tools/reveal-js/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../Tools//reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../Tools//reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../Tools//reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../Tools//reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../Tools//reveal-js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../Tools//reveal-js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
