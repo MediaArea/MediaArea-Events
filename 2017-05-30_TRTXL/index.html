@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+    <title>MediaConch</title>
+
+    <meta name="description" content="MediaConch: implementation and policy checking on FFV1, Matroska, LPCM, and more">
+    <meta name="author" content="Jérôme Martinez">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../Tools/reveal-js/css/reveal.css">
+		<link rel="stylesheet" href="../Tools/reveal-js/css/theme/serif.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../Tools/reveal-js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../Tools/reveal-js/css/print/pdf.css' : '../Tools/reveal-js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+    
+    <!-- MediaArea specific -->
+    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/MediaArea.css"> 
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+      <div class="slides">
+
+
+        <section>
+          <h1><strong>MediaConch</strong></h1>
+          <p>
+            Implementation and policy checking<br/> on FFV1, Matroska, LPCM (and more)<br/>
+            <img style="border-color: transparent;" src="img/MediaConch_90x90.png">
+          </p>
+          <p>
+              Jérôme Martinez, <a href="https://mediaarea.net">MediaArea</a>
+          </p>
+          <p>
+            The Real Thing XL - May 2017<br/>
+            <img style="border-color: transparent;" src="img/pfo_logo.png" alt="PREFORMA logo">
+            <img style="border-color: transparent;" src="img/eu_logo.png" alt="European Commission logo">
+            <img style="border-color: transparent;" src="img/ec_logo.png" alt="FP7-ICT Programme logo">
+          </p>
+        </section>
+
+        <section data-background="img/top.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">What is MediaConch?</h2>
+          <p style="text-align:left;">MediaConch is a conformance checker</p>
+          <ul>
+            <li>Implementation checker</li>
+            <li>Policy checker</li>
+            <li>Reporter</li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/top.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">What is MediaConch?</h2>
+          <table><tr><td>Implementation report:<br/><img style="border-color: transparent;" src="img/mediaconch_report_implementation.png" alt="Reporter"></td>
+          <td>Policy report:<br/><img style="border-color: transparent;" src="img/mediaconch_report_policy.png" alt="Reporter"></td></tr></table>
+          </p>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <section data-background="img/top.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">MediaConch interfaces</h2>
+          <ul>
+            <li>Graphical interface</li>
+            <li>Web interface</li>
+            <li>Command line</li>
+            <li>Server (REST API)</li>
+            <li>(Work in progress) a library (.dll/.so/.dylib)</li>
+          </ul>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <section data-background="img/top.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Integration</h2>
+          <p style="text-align:left;">Archivematica is an integrated suite of open-source software tools that allows users to process digital objects from ingest to access in compliance with the ISO-OAIS functional model</br>
+          <img style="border-color: transparent;" src="img/archivematica.png" alt="video_bitflip_detected">
+          </p>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <section data-background="img/top.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+          <h2 style="text-align:left;">Demo!</h2>
+          <ul>
+            <li>Online version:<br/><a href="https://mediaarea.net/MediaConchOnline">https://mediaarea.net/MediaConchOnline</a></li>
+            <li>Local:<br/><a href="https://mediaarea.net/MediaConch">https://mediaarea.net/MediaConch</a></li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section data-background="img/top.png" data-background-repeat="none" data-background-size="100%" data-background-position="0px 0px">
+            <h2>Stay in touch</h2>
+            <p>MediaArea: <a href="//mediaarea.net">https://mediaarea.net</a>, <a href="https://twitter.com/MediaArea_Net">@MediaArea_net</a></p>
+            <p>MediaConch: <a href="//mediaarea.net/MediaConch">https://mediaarea.net/MediaConch</a>, <a href="https://twitter.com/MediaConch">@MediaConch</a></p></p>
+            <p>Jérôme Martinez: <a href="mailto:jerome@mediaarea.net">jerome@mediaarea.net</a></p>
+            <p>Slides: <a href="//mediaarea.net/Events">https://mediaarea.net/Events</a></p>
+            <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a></p>
+        </section>
+
+			</div>
+
+		</div>
+
+    <script src="../Tools/reveal-js/lib/js/head.min.js"></script>
+    <script src="../Tools/reveal-js/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: false,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../Tools/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../Tools/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../Tools/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../Tools/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../Tools/reveal-js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../Tools/reveal-js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

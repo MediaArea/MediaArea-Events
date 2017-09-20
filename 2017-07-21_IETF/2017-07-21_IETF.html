@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>State of FFV1 specifications</title>
+    <meta name="description" content="BWF/MXF/IMF to EBUCore/FIMS">
+    <meta name="author" content="Jérôme Martinez">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../Tools/reveal-js/css/reveal.css">
+		<link rel="stylesheet" href="../Tools/reveal-js/css/theme/serif.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../Tools/reveal-js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../Tools//reveal-js/css/print/pdf.css' : '../Tools//reveal-js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+    
+    <!-- MediaArea specific -->
+    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/MediaArea.css"> 
+	</head>
+
+  <body>
+
+    <div class="reveal">
+
+      <div class="slides">
+
+        <section>
+          <h2>State of FFV1 specifications</h2>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>Jérôme Martinez</p>
+        </section>
+
+        <section style="text-align:left;">
+          <h2>Specs vs reference encoder</h2>
+          <p>Reference encoder has some known bugs</p>
+          <p>Reference decoder supports them</p>
+          <p>Challenging to change now (files already in the wild)</p>
+          <p>We updated specs with documentation of "exceptions"</p>
+          <p>We may remove them in the next version of the format</p>
+        </section>
+
+        <section style="text-align:left;">
+          <h2>Cleanup</h2>
+          <p>We use everywhere the same name for the same thing (capitalization included)</p>
+          <p>Formating for being more compatible with RFC style</p>
+          <p>We corrected some typos (e.g. unsigned in decoder, signed in specs)</p>
+        </section>
+
+        <section style="text-align:left;">
+          <h2>More explicit specification</h2>
+          <p>Rewording of some sections</p>
+          <p>Adding more descriptions</p>
+        </section>
+
+        <section style="text-align:left;">
+          <h2>Matroska binding</h2>
+          <p>V_FFV1 CodecID</p>
+          <p>FFmpeg supports it</p>
+          <p>FFmpeg does not write it by default (compatibility with older versions)</p>
+        </section>
+
+        <section style="text-align:left;">
+          <h2>Missing part</h2>
+          <p>The Pixel() description is missing</p>
+          <p>Lot is already described in plain English</p>
+          <p>We need to make an explicit C-like description</p>
+        </section>
+
+        <section style="text-align:left;">
+          <h2>Implementations</h2>
+          <p>FFmpeg encoder/decoder</p>
+          <p>libav encoder/decoder (fork from FFmpeg)</p>
+          <p>MediaInfo decoder (different implementation)</p>
+        </section>
+
+        <section style="text-align:left;">
+          <h2>FFV1 v4</h2>
+          <p>Request for supporting more pixel formats</p>
+          <p>And more native metadata (not relying on the container metadata)</p>
+          <p>Optimization of the algorithm?</p>
+        </section>
+
+        <section style="text-align:left;">
+          <h2>Questions?</h2>
+        </section>
+
+    </div>
+
+    <script src="../Tools/reveal-js/lib/js/head.min.js"></script>
+    <script src="../Tools/reveal-js/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: false,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../Tools//reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../Tools//reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../Tools//reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../Tools//reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../Tools//reveal-js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../Tools//reveal-js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

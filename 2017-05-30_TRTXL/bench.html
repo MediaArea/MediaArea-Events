@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+    <title>MediaConch</title>
+
+    <meta name="description" content="MediaConch: implementation and policy checking on FFV1, Matroska, LPCM, and more">
+    <meta name="author" content="Jérôme Martinez">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="reveal-js/css/reveal.css">
+		<link rel="stylesheet" href="reveal-js/css/theme/serif.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="reveal-js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal-js/css/print/pdf.css' : 'reveal-js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+    
+    <!-- MediaArea specific -->
+    <link rel="stylesheet" href="reveal-js/css/theme/MediaArea.css"> 
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+      <div class="slides">
+
+
+        <section>
+          <h3>Performance (!!WIP!!)</h3>
+          <p style="font-size: small">
+            From VIAA digitalized content (MXF/JP2K, SD 10-bit 4:2:2)<br/>
+            Preliminary results<br/>
+            With an Intel E5-2698V3 (16 cores, 2.3-3.6 GHz), FFmpeg 3.2 (without external libs)
+          </p>
+          <p>
+              single core:<br/>
+              - JP2k decoding: 0.16 fps / 2.3 MB/s<br/>
+              - JP2k decoding then FFV1 encoding: 0.14 fps / 2.0 MB/s (-10% files size)<br/>
+              - FFV1 checking by MediaConch: 0.55 fps / 7.5 MB/s<br/>
+              - FFV1 decoding: 0.50 fps / 6.5 MB/s<br/>
+              Scalability: for this CPU, x20<br/>
+              - FFV1 checking by MediaConch: 10 fps / 150 MB/s<br/>
+              Note: this is an average! lot of difference between files<br/>
+              To do: test with OpenJPEG, FrameMD5
+          </p>
+        </section>
+
+			</div>
+
+		</div>
+
+    <script src="reveal-js/lib/js/head.min.js"></script>
+    <script src="reveal-js/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'reveal-js/plugin/zoom-js/zoom.js', async: true },
+					{ src: 'reveal-js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

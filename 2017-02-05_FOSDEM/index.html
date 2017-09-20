@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Media Analysis Tools</title>
+    <meta name="description" content="Media Analysis Tools">
+    <meta name="author" content="Jérôme Martinez">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../Tools/reveal-js/css/reveal.css">
+    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/serif.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="../Tools/reveal-js/lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '../Tools/reveal-js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../Tools/reveal-js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+    
+    <!-- MediaArea specific -->
+    <link rel="stylesheet" href="../Tools/reveal-js/css/theme/MediaArea.css"> 
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <div class="slides">
+
+
+        <section>
+          <h2>Media Analysis Tools</h2>
+          <p>How we check media files</p>
+          <p><br/><br/><br/><br/><br/><br/>
+              Jérôme Martinez<br>
+              <a href="https://mediaarea.net">MediaArea.net SARL</a>
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Different needs</h2>
+          <p><ul>
+			<li>Metadata extraction and review</li>
+			<li>File format (containers, coding) validation</li>
+			<li>File format investigation</li>
+			<li>Local policy conformance</li>
+			<li>Metadata editing/fixing</li>
+			<li>Audiovisual quality control</li>
+		  </ul></p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaInfo</h2>
+          <p style="text-align:left;">Metadata extraction and review</p>
+          <ul>
+            <li>Convenient unified display</li>
+            <li>Of most relevant technical and tag data</li>
+            <li>For video / audio / text / ancillary data files</li>
+            <li>6k downloads/day, 40k GUI launches/day</li>
+            <li>BSD-2-Clause license</li>
+          </ul>
+		  <p>
+            <img style="border-color: transparent;" src="img/MediaInfo_90x90.png">
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaInfo</h2>
+          <p style="text-align:left;">Supported formats</p>
+          <ul>
+            <li>Most formats used by either individuals or professionals</li>
+            <li>Detects weird transport layers<br>
+			e.g. Dolby E spanned on 2 audio tracks, subtitles in the ancillary data, sidecar files...</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaInfo</h2>
+          <p style="text-align:left;">Export</p>
+          <ul>
+            <li>Classic flat text, XML...</li>
+            <li>Also in professional output formats e.g. PBCore, EBUCore, FIMS...</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaConch</h2>
+          <p style="text-align:left;">A conformance checker</p>
+          <ul>
+            <li>Implementation checker</li>
+            <li>Policy checker</li>
+            <li>Reporter</li>
+            <li>GPLv3+/MPLv2+ license</li>
+          </ul>
+		  <p>
+            <img style="border-color: transparent;" src="img/MediaConch_90x90.png">
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaConch</h2>
+          <p style="text-align:left;">Supported formats</p>
+          <ul>
+            <li>Implementation checker for Matroska, FFV1, PCM natively</li>
+            <li>Implementation checker for PDF and TIFF via plugins<br />(veraPDF and DPFManager projects)</li>
+            <li>Policy checker for all formats</li>
+            <li>Optional server mode (watch folder)</li>
+            <li>Optionaly an ordonancer<br/>
+			e.g. FFmpeg transmux / transcode before checks</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaTrace</h2>
+          <p style="text-align:left;">Deep check of bytes</p>
+          <ul>
+            <li>Provides meaning of each bit in a file</li>
+            <li>Work in progress (sometimes stalls due to too much information, only first frames displayed)</li>
+            <li>Available in MediaInfo GUI (text mode), MediaConch GUI (Tree mode), MediaInfo and MediaConch CLI (Text, XML)</li>
+            <li>BSD-2-Clause license (in MediaInfoLib)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaTrace</h2>
+          <p style="text-align:left;">Example with a Matroska file</p>
+		  <p>
+            <img style="border-color: transparent;" src="img/MediaTrace.png">
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">MediaTrace</h2>
+          <p style="text-align:left;">Example with a TIFF file</p>
+		  <p>
+            <img style="border-color: transparent;" src="img/MediaTraceTiff.png">
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">BWF MetaEdit</h2>
+          <p style="text-align:left;">WAV/BWF Metadata checker and editor</p>
+          <ul>
+            <li>Focused on WAV format, used a lot by archives</li>
+            <li>Difference between requirements and recommandations</li>
+            <li>Can delete/modify/add metadata</li>
+            <li>Can export metadata</li>
+            <li>Public domain</li>
+          </ul>
+		  <p>
+            <img style="border-color: transparent;" src="img/BWFMetaEdit.png">
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">BWF MetaEdit</h2>
+          <p style="text-align:left;">Enforce the guidelines developed by </p>
+		  <ul>
+            <li>FADGI (US Federal Agencies Audio-Visual Working Group)</li>
+            <li>European Broadcasting Union (EBU)
+			  <ul>
+				<li>BWF (EBU tech 3285)</li>
+				<li>CodingHistory (EBU tech R98-1999)</li>
+				<li>OriginatorReferencce (EBU tech R99-1999)</li>
+			  </ul>
+			</li>
+            <li>Microsoft (INFO chunk)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">QCTools</h2>
+          <p style="text-align:left;">Audiovisual quality control</p>
+          <ul>
+            <li>On the decoded frame</li>
+            <li>Focused on digitalized content</li>
+            <li>Initially focused on video artefacts, now checking also audio</li>
+            <li>BSD-3-Clause license for UI/new filters, GPLv2+ for FFmpeg libs</li>
+          </ul>
+		  <p>
+            <img style="border-color: transparent;" src="img/QCTools_250.png">
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">QCTools</h2>
+          <p style="text-align:left;">Tied to FFmpeg</p>
+          <ul>
+            <li>Depends on FFmpeg for demux, decode, and check</li>
+            <li>Some tests were already present in FFmpeg (especially libavfilter), we added an UI</li>
+            <li>We also added some tests to libavfilter upstream</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">QCTools</h2>
+          <p style="text-align:left;">List - Video</p>
+          <ul>
+            <li>YUV: MIN, AVG, MAX, LOW, HIGH, Difference</li>
+            <li>Saturation, Hue, Temporal Outliers, Vertical Line Repetitions</li>
+            <li>Broadcast Range, Crop Width/Height</li>
+            <li>Peak Signal to Noise Ratio (PSNRf), Structural SImilarity Metric (SSIMf), Mean Square Error (MSEf)</li>
+            <li> Interlacement Detection</li>
+          </ul>
+		  <p style="text-align:left;">Note: tool is focused on field comparison for the moment</p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">QCTools</h2>
+          <p style="text-align:left;">List - Audio</p>
+          <p style="text-align:left;">R.128, Audio Phase Meter, DC Offset, Audio Diffs, RMS</p>
+		  <p>
+            <img style="border-color: transparent;" src="img/QCTools_Example.png" width="50%">
+          </p>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Interfaces</h2>
+          <p style="text-align:left;">Not only one interface: different people, different needs, different technical knowledges</p>
+          <ul>
+            <li>Command line</li>
+            <li>Graphical interface</li>
+            <li>Server (REST API)</li>
+            <li>Web interface</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Standardization</h2><br>
+          <p style="text-align:left;">Issues:</p>
+          <ul>
+            <li>Checking is good, but compared to what?</li>
+            <li>Lack of open video/audio standards</li>
+            <li>Lot of people work on lossy formats (e.g. VP9, AV1, Opus)</li>
+            <li>Some people need lossless formats</li>
+          </ul>
+          <ul>
+          </ul>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Standardization</h2><br>
+          <p style="text-align:left;">CELLAR: IETF workgroup</p>
+		  <ul>
+            <li>Container: Matroska</li>
+            <li>Video: FFV1</li>
+            <li>Audio: FLAC (not started)</li>
+          </ul>
+          <ul>
+          </ul>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Sponsorships</h2><br>
+          <p style="text-align:left;">Lot of work, we need sponsorship</p>
+          <ul>
+            <li>Several compagnies (usually don't like to be named :( )</li>
+            <li>European Union (especially <a href="http://www.preforma-project.eu/">PREFORMA project</a>)</li>
+            <li>US Federal Agencies Digital Guidelines Initiative</li>
+            <li>National Endowment for the Humanities</li>
+			<li>The Knight Foundation</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 style="text-align:left;">Contributions</h2><br>
+          <p style="text-align:left;">We need you!</p>
+          <ul>
+            <li>Patch for new features</li>
+            <li>Patch for bug fixes</li>
+            <li>Participation in CELLAR</li>
+            <li>Design (e.g MediaConch new displays)</li>
+            <li>Participation in documentation writting</li>
+            <li>Testing</li>
+            <li>...</li>
+          </ul>
+        </section>
+
+        <section>
+            <h2>Stay in touch</h2>
+            <p>MediaInfo: <a href="//mediaarea.net/MediaInfo">https://mediaarea.net/MediaInfo</a></p>
+            <p>MediaConch: <a href="//mediaarea.net/MediaInfo">https://mediaarea.net/MediaConch</a></p>
+            <p>BWF MetaEdit: <a href="//mediaarea.net/MediaInfo">https://mediaarea.net/BWFMetaEdit</a></p>
+            <p>QCTools: <a href="//mediaarea.net/MediaInfo">https://mediaarea.net/QCTools</a></p>
+			<p>Follow us on Twitter <a href="https://twitter.com/MediaArea_Net">@MediaArea_net</a></p>
+            <p>Jérôme Martinez: <a href="mailto:jerome@mediaarea.net">jerome@mediaarea.net</a></p>
+            <p>Slides: <a href="//mediaarea.net/Events">https://mediaarea.net/Events</a></p>
+            <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a></p>
+        </section>
+
+    </div>
+
+    <script src="../Tools/reveal-js/lib/js/head.min.js"></script>
+    <script src="../Tools/reveal-js/js/reveal.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: '../Tools/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../Tools/reveal-js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../Tools/reveal-js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../Tools/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '../Tools/reveal-js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: '../Tools/reveal-js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
